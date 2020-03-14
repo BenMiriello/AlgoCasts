@@ -17,6 +17,39 @@
 //       '### '
 //       '####'
 
-function steps(n) {}
+function steps(n) {
+    // from 0 to n
+    for (let row = 0; row < n; row++) {
+        // create empty string for stair
+        let stair = ''
+        // if column <= row, add a '#', else add a ' '
+        for (let column = 0; column < n; column++) {
+            if (column <= row) {
+                stair += '#'
+            } else {
+                stair += ' '
+            }
+        }
+        console.log(stair)
+    }
+}
 
 module.exports = steps;
+
+
+// function steps(n) {
+//     // from 0 to n
+//     for (let row = 0; row < n; row++) {
+//         // create empty string for stair
+//         let stair = ''
+//         // add a space to stair n times
+//         for (let column = 0; column < n; column++) {
+//             stair += ' '
+//         }
+//         // replace chars with '#', starting at 0, row + 1 times
+//         for (let index = 0; index <= row; index++) {
+//             stair = stair.replace(stair[index], '#')
+//         }
+//         console.log(stair)
+//     }
+// }
