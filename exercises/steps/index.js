@@ -25,15 +25,10 @@ function steps(n, row = 0, stair = '') {
     // if end of row
     if (n === stair.length) {
         console.log(stair)
-        steps(n, row + 1)
-        return 
+        return steps(n, row + 1) 
     }
     // build stair
-    if (stair.length <= row) {
-        stair += '#'
-    } else {
-        stair += ' '
-    }
+    stair += stair.length <= row ? '#' : ' '
     steps(n, row, stair)
 }
 
