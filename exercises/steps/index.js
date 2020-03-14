@@ -17,26 +17,48 @@
 //       '### '
 //       '####'
 
-function steps(n) {
-    // from 0 to n
-    for (let row = 0; row < n; row++) {
-        // create empty string for stair
-        let stair = ''
-        // if column <= row, add a '#', else add a ' '
-        for (let column = 0; column < n; column++) {
-            if (column <= row) {
-                stair += '#'
-            } else {
-                stair += ' '
-            }
-        }
-        console.log(stair)
+function steps(n, row = 0, stair = '') {
+    // if done
+    if (n === row) {
+        return;
     }
+    // if end of row
+    if (n === stair.length) {
+        console.log(stair)
+        steps(n, row + 1)
+        return 
+    }
+    // build stair
+    if (stair.length <= row) {
+        stair += '#'
+    } else {
+        stair += ' '
+    }
+    steps(n, row, stair)
 }
 
 module.exports = steps;
 
+// // Solution 2
+// function steps(n) {
+//     // from 0 to n
+//     for (let row = 0; row < n; row++) {
+//         // create empty string for stair
+//         let stair = ''
+//         // if column <= row, add a '#', else add a ' '
+//         for (let column = 0; column < n; column++) {
+//             if (column <= row) {
+//                 stair += '#'
+//             } else {
+//                 stair += ' '
+//             }
+//         }
+//         console.log(stair)
+//     }
+// }
 
+
+// // Solution 1
 // function steps(n) {
 //     // from 0 to n
 //     for (let row = 0; row < n; row++) {
