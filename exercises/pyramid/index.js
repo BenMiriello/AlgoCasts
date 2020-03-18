@@ -13,7 +13,45 @@
 //       '  #  '
 //       ' ### '
 //       '#####'
+//   pyramid(4)
+//       '   #   '
+//       '  ###  '
+//       ' ##### '
+//       '#######' 
 
-function pyramid(n) {}
+function pyramid(n) {
+    const midpoint = Math.floor((2 * n - 1) / 2);
+
+    for (let row = 0; row < n; row ++) {
+        let level = ''
+
+        for (let column = 0; column < 2 * n - 1; column++) {
+            if (midpoint - row <= column && midpoint + row >= column) {
+                level += '#'
+            } else {
+                level += ' '
+            }
+        }
+
+        console.log(level)
+    }
+}
 
 module.exports = pyramid;
+
+// function pyramid(n) {
+//     let rowLength = n * 2 - 1
+//     let emptyLevel = []
+//     for (let i = 0; i < rowLength; i++) {
+//         emptyLevel.push(' ')
+//     }
+//     for (let row = 0; row < n; row++) {
+//         let level = emptyLevel
+//         for (let width = ((row + 1) * 2) - 1, cell = n - row; cell < width - row; cell++) {
+//             level[cell] = '#'
+//         }
+//         if (level.includes('#')) {
+//             console.log(level.join(''))
+//         }
+//     }
+// }
