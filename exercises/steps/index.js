@@ -18,16 +18,14 @@
 //       '####'
 
 function steps(n, row = 0, stair = '') {
-    // if done
-    if (n === row) {
-        return;
-    }
-    // if end of row
+    // end when all rows have ben made
+    if (n === row) return;
+    // start new row when stair is done
     if (n === stair.length) {
         console.log(stair)
         return steps(n, row + 1) 
     }
-    // build stair
+    // row times add '#', else add ' '
     stair += stair.length <= row ? '#' : ' '
     steps(n, row, stair)
 }
