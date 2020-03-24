@@ -8,17 +8,22 @@
 //   vowels('Why?') --> 0
 
 function vowels(str) {
-    const checker = ['a','e','i','o','u'];
-    let n = 0
-    for (let char of str.toLowerCase()) {
-        if (checker.includes(char)) {
-            n ++
-        }
-    }
-    return n
+    const matches = str.match(/[aeiou]/gi)
+    return matches ? matches.length : 0
 };
 
 module.exports = vowels;
+
+// function vowels(str) {
+//     const checker = ['a','e','i','o','u'];
+//     let n = 0
+//     for (let char of str.toLowerCase()) {
+//         if (checker.includes(char)) {
+//             n ++
+//         }
+//     }
+//     return n
+// };
 
 // function vowels(str) {
 //     const array = str.toLowerCase().split('')
@@ -33,3 +38,4 @@ module.exports = vowels;
 //     };
 //     return n;
 // };
+
