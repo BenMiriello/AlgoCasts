@@ -14,6 +14,7 @@ function vowels(str) {
 
 module.exports = vowels;
 
+
 // function vowels(str) {
 //     const checker = ['a','e','i','o','u'];
 //     let n = 0
