@@ -19,7 +19,7 @@ function matrix(n) {
 
     const fillMatrices = (outer, count = n + 1, coords = [n - 1,1], dir = [1, false, 0, n - 2], total = n * n) => {
 
-        console.log(n, ' IN: (count:',count, ',coords:', coords, 'dir:', dir,  '): ', outer)
+        // console.log(n, ' IN: (count:',count, ',coords:', coords, 'dir:', dir,  '): ', outer)
 
         // note: direction run refers how many times we'll add a number while going in the same direction before changing directions
     
@@ -37,6 +37,7 @@ function matrix(n) {
 
         // end or increment
         if (count === total) {
+
             return outer
         } else count++ ;
     
@@ -68,25 +69,17 @@ function matrix(n) {
             dir[2]++
         };
 
-        console.log('dir[0]:', dir[0])
+        // console.log('dir[0]:', dir[0])
     
         // // set next coords
         if (dir[0] === 0) coords[0] ++
         if (dir[0] === 1) coords[1] ++
         if (dir[0] === 2) coords[0] --
         if (dir[0] === 3) coords[1] --
-        
-        // why was switch not working?
-        // switch (dir[0]) {
-        //     case 0: coords[0] ++ 
-        //     case 1: coords[1] ++
-        //     case 2: coords[0] --
-        //     case 3: coords[1] --
-        // };
 
-        console.log(n, 'OUT: (count:',count, ',coords:', coords, 'dir:', dir,  '): ', outer)
+        // console.log(n, 'OUT: (count:',count, ',coords:', coords, 'dir:', dir,  '): ', outer)
     
-        fillMatrices(outer, count, coords, dir, total)
+        return fillMatrices(outer, count, coords, dir, total)
     };
     
     let outer = [];
