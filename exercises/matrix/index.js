@@ -15,6 +15,14 @@
 //     [11, 16, 15, 6],
 //     [10,  9,  8, 7]]
 
-function matrix(n) {}
+function matrix(n) {
+    let outer = []
+    for (let i = 0; i < n; i++) {
+        outer[i] = []
+        for (let j = 0; j < n; j++) {
+            outer[i].push(0)
+        }
+    }
+}
 
 module.exports = matrix;
