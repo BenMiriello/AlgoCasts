@@ -17,87 +17,159 @@
 
 function matrix(n) {
 
-    const fillMatrices = (outer, count = n + 1, coords = [n - 1,1], dir = [1, false, 0, n - 2], total = n * n) => {
+    const fillMatrices = (
+        spiral, 
+        total = n * n, 
+        count = n + 1, 
+        coords = [n - 1,1], 
+        direction = 1, 
+        isRun2 = false, 
+        runCounter = 0, 
+        runLength = n - 2 
+        ) => { 
+        // note: run refers how many times to add a number while going in a given direction before changing directions
+        // coords is [x,y] or [position in array, index of array in spiral]
+    
 
-        // console.log(n, ' IN: (count:',count, ',coords:', coords, 'dir:', dir,  '): ', outer)
-
-        // note: direction run refers how many times we'll add a number while going in the same direction before changing directions
-    
-        // count is for 1 - n, iterating through whole thing
-    
-        // coords is [x,y] or [position in array, index of array in outer]
-    
-        // dir[0] is direction (0->right 1->down 2->left 3->up)
-        // dir[1] is either true or false (true-> do another run through at current length before changing directions, false->length of direction run decrements at end of run)
-        // dir[2] is how long this direction has been counting for (0 idxed)
-        // dir[3] is how long this direction will count for (0 idxed)
-    
         // ADD TO OUTPUT ARRAY
-        outer[coords[1]][coords[0]] = count
+        spiral[coords[1]][coords[0]] = count
 
         // end or increment
         if (count === total) {
-
-            return outer
+            return spiral
         } else count++ ;
     
+
         // WORK OUT DIRECTIONS FOR NEXT RECURSION
     
-        // when we need to change directions, evaluate
-        if (dir[2] === dir[3]) {
+        // if need to change directions, evaluate
+        if (runCounter === runLength) {
             
             // decrement direction run length if it's the end of the second run for that direction
-            if (dir[1]) { 
-                dir[3] -- 
-            };
+            if (isRun2) runLength --;
             
             // toggle bool that keeps track of when to decrement run length
-            dir[1] = !dir[1] ;
+            isRun2 = !isRun2 ;
     
             // reset direction run counter
-            dir[2] = 0 ;
+            runCounter = 0;
     
             // set next direction
-            if (dir[0] === 3) {
-                dir[0] = 0
-            } else {
-                dir[0] ++
-            };
+            if (direction === 3) {
+                direction = 0
+            } else direction ++;
     
             // otherwise just increment run counter
-        } else {
-            dir[2]++
-        };
-
-        // console.log('dir[0]:', dir[0])
+        } else runCounter++;
     
         // // set next coords
-        if (dir[0] === 0) coords[0] ++
-        if (dir[0] === 1) coords[1] ++
-        if (dir[0] === 2) coords[0] --
-        if (dir[0] === 3) coords[1] --
-
-        // console.log(n, 'OUT: (count:',count, ',coords:', coords, 'dir:', dir,  '): ', outer)
+        if (direction === 0) coords[0] ++
+        if (direction === 1) coords[1] ++
+        if (direction === 2) coords[0] --
+        if (direction === 3) coords[1] --
     
-        return fillMatrices(outer, count, coords, dir, total)
+        return fillMatrices(spiral, total, count, coords, direction, isRun2, runCounter, runLength)
     };
     
-    let outer = [];
+    let spiral = [];
     for (let x = 0; x < n; x++) {
-        outer[x] = [];
+        spiral[x] = [];
         for (let y = 0; y < n; y++) {
-            outer[x].push(0)
+            spiral[x].push(0)
         };
     };
 
     // fill first array
     for (let i = 0; i < n; i++) {
-        outer[0][i] = i + 1
+        spiral[0][i] = i + 1
     }
 
-    return fillMatrices(outer)
+    return fillMatrices(spiral)
 
 };
 
 module.exports = matrix;
 
+// function matrix(n) {
+
+//     const fillMatrices = (outer, count = n + 1, coords = [n - 1,1], dir = [1, false, 0, n - 2], total = n * n) => {
+
+//         // console.log(n, ' IN: (count:',count, ',coords:', coords, 'dir:', dir,  '): ', outer)
+
+//         // note: direction run refers how many times we'll add a number while going in the same direction before changing directions
+    
+//         // count is for 1 - n, iterating through whole thing
+    
+//         // coords is [x,y] or [position in array, index of array in outer]
+    
+//         // dir[0] is direction (0->right 1->down 2->left 3->up)
+//         // dir[1] is either true or false (true-> do another run through at current length before changing directions, false->length of direction run decrements at end of run)
+//         // dir[2] is how long this direction has been counting for (0 idxed)
+//         // dir[3] is how long this direction will count for (0 idxed)
+    
+//         // ADD TO OUTPUT ARRAY
+//         outer[coords[1]][coords[0]] = count
+
+//         // end or increment
+//         if (count === total) {
+
+//             return outer
+//         } else count++ ;
+    
+//         // WORK OUT DIRECTIONS FOR NEXT RECURSION
+    
+//         // when we need to change directions, evaluate
+//         if (dir[2] === dir[3]) {
+            
+//             // decrement direction run length if it's the end of the second run for that direction
+//             if (dir[1]) { 
+//                 dir[3] -- 
+//             };
+            
+//             // toggle bool that keeps track of when to decrement run length
+//             dir[1] = !dir[1] ;
+    
+//             // reset direction run counter
+//             dir[2] = 0 ;
+    
+//             // set next direction
+//             if (dir[0] === 3) {
+//                 dir[0] = 0
+//             } else {
+//                 dir[0] ++
+//             };
+    
+//             // otherwise just increment run counter
+//         } else {
+//             dir[2]++
+//         };
+
+//         // console.log('dir[0]:', dir[0])
+    
+//         // // set next coords
+//         if (dir[0] === 0) coords[0] ++
+//         if (dir[0] === 1) coords[1] ++
+//         if (dir[0] === 2) coords[0] --
+//         if (dir[0] === 3) coords[1] --
+
+//         // console.log(n, 'OUT: (count:',count, ',coords:', coords, 'dir:', dir,  '): ', outer)
+    
+//         return fillMatrices(outer, count, coords, dir, total)
+//     };
+    
+//     let outer = [];
+//     for (let x = 0; x < n; x++) {
+//         outer[x] = [];
+//         for (let y = 0; y < n; y++) {
+//             outer[x].push(0)
+//         };
+//     };
+
+//     // fill first array
+//     for (let i = 0; i < n; i++) {
+//         outer[0][i] = i + 1
+//     }
+
+//     return fillMatrices(outer)
+
+// };
