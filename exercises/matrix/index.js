@@ -1,66 +1,38 @@
 // --- Directions
 // Write a function that accepts an integer N
 // and returns a NxN spiral matrix.
-// --- Examples
-//   matrix(2)
-//     [[1, 2],
-//     [4, 3]]
-//   matrix(3)
-//     [[1, 2, 3],
-//     [8, 9, 4],
-//     [7, 6, 5]]
-//  matrix(4)
-//     [[1,   2,  3, 4],
-//     [12, 13, 14, 5],
-//     [11, 16, 15, 6],
-//     [10,  9,  8, 7]]
 
 function matrix(n) {
 
     const fillMatrices = (
-        spiral, 
-        total = n * n, 
-        count = n + 1, 
-        coords = [n - 1,1], 
-        direction = 1, 
-        isRun2 = false, 
-        runCounter = 0, 
-        runLength = n - 2 
-        ) => { 
-        // note: run refers how many times to add a number while going in a given direction before changing directions
-        // coords is [x,y] or [position in array, index of array in spiral]
-    
+        spiral, // the matrix
+        total = n * n, // grand total of cells
+        count = n + 1, // count of grand total
+        coords = [n - 1,1], // [position in nested array, index of array in matrix]
+        direction = 1, // direction key:  0->right  1->down  2->left  3->up
+        isRun2 = false, // function will do 2 runs of equal length before decrementing run length. This keeps track.
+        runCounter = 0, // keeps track of how far along we are in a since run
+        runLength = n - 2 // how many times to add a number while going in a given direction before changing directions
+        ) => {
 
-        // ADD TO OUTPUT ARRAY
-        spiral[coords[1]][coords[0]] = count
+        spiral[coords[1]][coords[0]] = count // add to spiral output array
 
-        // end or increment
-        if (count === total) {
+        if (count === total) { // either end or increment
             return spiral
         } else count++ ;
     
+        if (runCounter === runLength) { // if need to change directions, evaluate and reset run values
+            
+            if (isRun2) runLength --; // length of a run changes every 2 runs (except for first which only goes once, covered in a special case at initialization, below)
 
-        // WORK OUT DIRECTIONS FOR NEXT RECURSION
-    
-        // if need to change directions, evaluate
-        if (runCounter === runLength) {
-            
-            // decrement direction run length if it's the end of the second run for that direction
-            if (isRun2) runLength --;
-            
-            // toggle bool that keeps track of when to decrement run length
             isRun2 = !isRun2 ;
-    
-            // reset direction run counter
             runCounter = 0;
     
-            // set next direction
-            if (direction === 3) {
+            if (direction === 3) { // set next direction
                 direction = 0
             } else direction ++;
     
-            // otherwise just increment run counter
-        } else runCounter++;
+        } else runCounter++; // otherwise just increment run counter
     
         // // set next coords
         if (direction === 0) coords[0] ++
@@ -71,24 +43,99 @@ function matrix(n) {
         return fillMatrices(spiral, total, count, coords, direction, isRun2, runCounter, runLength)
     };
     
-    let spiral = [];
-    for (let x = 0; x < n; x++) {
+    let spiral = []; // initialize matrix
+    for (let x = 0; x < n; x++) { // create matrices
         spiral[x] = [];
-        for (let y = 0; y < n; y++) {
-            spiral[x].push(0)
-        };
     };
 
-    // fill first array
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < n; i++) { // fill first array
         spiral[0][i] = i + 1
     }
 
     return fillMatrices(spiral)
-
 };
 
 module.exports = matrix;
+
+// function matrix(n) {
+
+//     const fillMatrices = (
+//         spiral, 
+//         total = n * n, 
+//         count = n + 1, 
+//         coords = [n - 1,1], 
+//         direction = 1, 
+//         isRun2 = false, 
+//         runCounter = 0, 
+//         runLength = n - 2 
+//         ) => { 
+//         // note: run refers how many times to add a number while going in a given direction before changing directions
+//         // coords is [x,y] or [position in array, index of array in spiral]
+    
+
+//         // ADD TO OUTPUT ARRAY
+//         spiral[coords[1]][coords[0]] = count
+
+//         // end or increment
+//         if (count === total) {
+//             return spiral
+//         } else count++ ;
+    
+
+//         // WORK OUT DIRECTIONS FOR NEXT RECURSION
+    
+//         // if need to change directions, evaluate
+//         if (runCounter === runLength) {
+            
+//             // decrement direction run length if it's the end of the second run for that direction
+//             if (isRun2) runLength --;
+            
+//             // toggle bool that keeps track of when to decrement run length
+//             isRun2 = !isRun2 ;
+    
+//             // reset direction run counter
+//             runCounter = 0;
+    
+//             // set next direction
+//             if (direction === 3) {
+//                 direction = 0
+//             } else direction ++;
+    
+//             // otherwise just increment run counter
+//         } else runCounter++;
+    
+//         // // set next coords
+//         if (direction === 0) coords[0] ++
+//         if (direction === 1) coords[1] ++
+//         if (direction === 2) coords[0] --
+//         if (direction === 3) coords[1] --
+    
+//         return fillMatrices(spiral, total, count, coords, direction, isRun2, runCounter, runLength)
+//     };
+    
+//     // initialize spiral with all 0's
+//     let spiral = [];
+//     for (let x = 0; x < n; x++) {
+//         spiral[x] = [];
+//         for (let y = 0; y < n; y++) {
+//             spiral[x].push(0)
+//         };
+//     };
+
+//     // fill first array
+//     for (let i = 0; i < n; i++) {
+//         spiral[0][i] = i + 1
+//     }
+
+//     return fillMatrices(spiral)
+
+// };
+
+
+
+
+
+
 
 // function matrix(n) {
 
@@ -173,3 +220,25 @@ module.exports = matrix;
 //     return fillMatrices(outer)
 
 // };
+
+
+
+
+
+
+
+
+
+// --- Examples
+//   matrix(2)
+//     [[1, 2],
+//     [4, 3]]
+//   matrix(3)
+//     [[1, 2, 3],
+//     [8, 9, 4],
+//     [7, 6, 5]]
+//  matrix(4)
+//     [[1,   2,  3, 4],
+//     [12, 13, 14, 5],
+//     [11, 16, 15, 6],
+//     [10,  9,  8, 7]]
