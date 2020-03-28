@@ -9,19 +9,25 @@
 //   fib(4) === 3
 
 function fib(n) {
-    if (n === 0) return 0
-    const runFib = (prevSum, sum, i) => {
-        const placeholder = sum
-        sum += prevSum
-        i++
-        if (i >= n) return sum
-        prevSum = placeholder
-        return runFib(prevSum, sum, i)
-    }
-    return runFib(0, 1, 1)
+    if (n < 2) return n
+    return fib(n - 1) + fib(n - 2)
 }
 
 module.exports = fib;
+
+
+// function fib(n) {
+//     if (n === 0) return 0
+//     const runFib = (prevSum, sum, i) => {
+//         const placeholder = sum
+//         sum += prevSum
+//         i++
+//         if (i >= n) return sum
+//         prevSum = placeholder
+//         return runFib(prevSum, sum, i)
+//     }
+//     return runFib(0, 1, 1)
+// }
 
 
 // function fib(n) {
