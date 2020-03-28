@@ -10,15 +10,40 @@
 
 function fib(n) {
     if (n === 0) return 0
-    let prevSum = 0
-    let sum = 1
-    let placeholder
-    for (i = 1; i < n; i++) {
-        placeholder = sum
+    const runFib = (prevSum, sum, i) => {
+        const placeholder = sum
         sum += prevSum
+        i++
+        if (i >= n) return sum
         prevSum = placeholder
+        return runFib(prevSum, sum, i)
     }
-    return sum
+    return runFib(0, 1, 1)
 }
 
 module.exports = fib;
+
+
+// function fib(n) {
+//     const result = []
+//     for (let i = 2; i <= n; i++) {
+//         const a = result[i - 1]
+//         const b = result[i - 2]
+//         result.push(a + b)
+//     }
+//     return result[n]
+// }
+
+
+// function fib(n) {
+//     if (n === 0) return 0
+//     let prevSum = 0
+//     let sum = 1
+//     let placeholder
+//     for (i = 1; i < n; i++) {
+//         placeholder = sum
+//         sum += prevSum
+//         prevSum = placeholder
+//     }
+//     return sum
+// }
