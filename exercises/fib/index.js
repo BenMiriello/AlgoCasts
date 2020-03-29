@@ -8,12 +8,34 @@
 // Example:
 //   fib(4) === 3
 
+const memoize = (fn) => {
+    const cache = {}
+    return (...args) => {
+        if (cache[args]) {
+            return cache[args]
+        }
+        const result = fn.apply(this, args);
+        cache[args] = result;
+
+        return result;
+    }
+}
+
 function fib(n) {
     if (n < 2) return n
     return fib(n - 1) + fib(n - 2)
 }
 
+fib = memoize(fib)
+
 module.exports = fib;
+
+
+// // the pithy recursive solution
+// function fib(n) {
+//     if (n < 2) return n
+//     return fib(n - 1) + fib(n - 2)
+// }
 
 
 // function fib(n) {
@@ -30,6 +52,7 @@ module.exports = fib;
 // }
 
 
+// // Stephen's iterative
 // function fib(n) {
 //     const result = []
 //     for (let i = 2; i <= n; i++) {
@@ -53,3 +76,4 @@ module.exports = fib;
 //     }
 //     return sum
 // }
+
