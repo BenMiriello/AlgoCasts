@@ -28,14 +28,12 @@ function weave(sourceOne, sourceTwo) {
     let queues = [sourceOne, sourceTwo]
     const queueThree = new Queue
     let current = 0
-    while (!!queues[0][0] || !!queues[1][0]) {
-        if (queues[current]) {
-            queueThree.add(queues[current].remove())
+    while (sourceOne.peek() || sourceTwo.peek()) {
+        if (sourceOne.peek()) {
+            queueThree.add(sourceOne.remove())
         }
-        if (current === 0) {
-            current = 1
-        } else {
-            current = 0
+        if (sourceTwo.peek()) {
+            queueThree.add(sourceTwo.remove())
         }
     }
     return queueThree
