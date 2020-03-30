@@ -23,6 +23,19 @@ class LinkedList {
         }
         return counter
     }
+
+    getFirst(){
+        return this.head
+    };
+
+    getLast(){
+        let last = this.head;
+        if (last === null) return last
+        while (last.next){
+            last = last.next
+        }
+        return last
+    }
 };
 
 module.exports = { Node, LinkedList };
