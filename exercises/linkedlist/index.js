@@ -10,12 +10,20 @@ class Node {
 }
 
 class LinkedList {
-    constructor(){
-        this.head = {data: null, next: null}
-    }
+    constructor(){ this.head = null }
 
-    insertFirst(node){
-        this.head.data = node
+    insertFirst(data){ this.head = new Node(data, this.head) }
+
+    size(){
+        let number = 0;
+        if (this.head === null) return number
+        number++
+        let currentNode = this.head;
+        while (currentNode.next != null) {
+            number++
+            currentNode = currentNode.next
+        }
+        return number
     }
 }
 
