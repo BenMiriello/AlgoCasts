@@ -7,7 +7,7 @@ class Node {
         this.data = data;
         this.next = next
     }
-}
+};
 
 class LinkedList {
     constructor(){ this.head = null }
@@ -15,21 +15,15 @@ class LinkedList {
     insertFirst(data){ this.head = new Node(data, this.head) }
 
     size(){
-        let number = 0;
-        if (this.head === null) return number
-        number++
+        let counter = 0;
         let currentNode = this.head;
-        while (currentNode.next != null) {
-            number++
+        while (currentNode) {
+            counter++;
             currentNode = currentNode.next
         }
-        return number
+        return counter
     }
-}
-
-l = new LinkedList
-l.insertFirst(1)
-console.log(l.head.data)
+};
 
 module.exports = { Node, LinkedList };
 
