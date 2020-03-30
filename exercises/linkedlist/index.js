@@ -63,13 +63,21 @@ class LinkedList {
         }
     }
 
-    getAt(integer){
+    getAt(index){
         let node = this.head
-        for (let i = 0; i < integer; i++) {
-            if (!node || !node.next) break
+        let counter = 0
+        while (node) {
+            if (counter === index) return node;
+            counter ++;
             node = node.next
         }
-        return node
+        return null;
+
+        // for (let i = 0; i < integer; i++) {
+        //     if (!node.next) break
+        //     node = node.next
+        // }
+        // return node
     }
 
     removeAt(integer){
