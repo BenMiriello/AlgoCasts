@@ -72,22 +72,18 @@ class LinkedList {
             node = node.next
         }
         return null;
-
-        // for (let i = 0; i < integer; i++) {
-        //     if (!node.next) break
-        //     node = node.next
-        // }
-        // return node
     }
 
-    removeAt(integer){
-        // if (integer === 1 || !this.head) {
-        //     this.head = null
-        //     return
-        // }
-        // let before = this.getAt(integer - 1)
-        // let after = before.next && before.next.next ? before.next.next : null
-        // before.next = after
+    removeAt(index){
+        if (index < 0 || !this.head) return
+        if (index === 0) {
+            this.head = this.head.next || null
+            return
+        }
+        let before = this.getAt(index - 1)
+        if (before && before.next){
+            before.next = before.next.next
+        }
     }
 };
 
