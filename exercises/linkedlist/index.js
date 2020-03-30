@@ -16,10 +16,10 @@ class LinkedList {
 
     size(){
         let counter = 0;
-        let currentNode = this.head;
-        while (currentNode) {
+        let node = this.head;
+        while (node) {
             counter++;
-            currentNode = currentNode.next
+            node = node.next
         }
         return counter
     }
@@ -27,12 +27,12 @@ class LinkedList {
     getFirst(){ return this.head };
 
     getLast(){
-        let last = this.head;
-        if (last === null) return last;
-        while (last.next){
-            last = last.next
+        let node = this.head;
+        if (!node) return;
+        while (node.next){
+            node = node.next
         };
-        return last
+        return node
     };
 
     clear(){ this.head = null };
@@ -40,20 +40,36 @@ class LinkedList {
     removeFirst(){ this.head = this.head.next };
 
     removeLast(){
-        if (this.head === null) return;
-        if (this.head.next === null) {
+        if (!this.head || !this.head.next) {
             this.head = null;
             return
         };
-        if (this.head.next.next === null) {
+        if (!this.head.next.next) {
             this.head.next = null;
             return
         }
-        let currentNode = this.head;
-        while (currentNode.next.next) {
-            currentNode = currentNode.next
+        let node = this.head;
+        while (node.next.next) {
+            node = node.next
         }
-        currentNode.next = null
+        node.next = null
+    }
+
+    insertLast(data){
+        if (!this.head){
+            this.head = new Node(data)
+        } else {
+            this.getLast().next = new Node(data)
+        }
+    }
+
+    getAt(integer){
+        let node = this.head
+        for (let i = 0; i < integer; i++) {
+            if (!node || !node.next) break
+            node = node.next
+        }
+        return node
     }
 };
 
