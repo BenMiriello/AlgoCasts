@@ -24,17 +24,36 @@ class LinkedList {
         return counter
     }
 
-    getFirst(){
-        return this.head
-    };
+    getFirst(){ return this.head };
 
     getLast(){
         let last = this.head;
-        if (last === null) return last
+        if (last === null) return last;
         while (last.next){
             last = last.next
-        }
+        };
         return last
+    };
+
+    clear(){ this.head = null };
+
+    removeFirst(){ this.head = this.head.next };
+
+    removeLast(){
+        if (this.head === null) return;
+        if (this.head.next === null) {
+            this.head = null;
+            return
+        };
+        if (this.head.next.next === null) {
+            this.head.next = null;
+            return
+        }
+        let currentNode = this.head;
+        while (currentNode.next.next) {
+            currentNode = currentNode.next
+        }
+        currentNode.next = null
     }
 };
 
