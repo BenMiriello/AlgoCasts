@@ -85,6 +85,19 @@ class LinkedList {
             before.next = before.next.next
         }
     }
+
+    insertAt(data, index){
+        if (index === 0) {
+            this.insertFirst(data)
+            return
+        }
+        let before = this.getAt(index - 1)
+        if (before && before.next){
+            before.next = new Node(data, before.next || null)
+        } else {
+            this.insertLast(data)
+        }
+    }
 };
 
 module.exports = { Node, LinkedList };
