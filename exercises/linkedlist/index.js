@@ -99,23 +99,14 @@ class LinkedList {
         }
     }
 
-    // forEach(fn){
-    //     let node = this.head
-    //     if (!node) return
-    //     while (node){
-    //         node.data = fn(node).data
-    //         node = node.next
-    //     }
-    // }
     forEach(fn) {
         let node = this.head;
-        let counter = 0;
         while (node) {
-          fn(node, counter);
-          node = node.next;
-          counter++;
+            fn(node);
+            node = node.next;
         }
-      }
+    }
 };
 
 module.exports = { Node, LinkedList };
+
