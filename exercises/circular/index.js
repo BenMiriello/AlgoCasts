@@ -14,10 +14,10 @@
 
 function circular(list) {
     let slow = list.head;
-    let fast = list.head;
+    let fast = list.head.next;
     while (fast){
-        slow = slow.next.next
-        fast = fast.next.next.next
+        slow = slow.next
+        fast = fast.next.next
         if (fast === slow) {
             return true
         }
