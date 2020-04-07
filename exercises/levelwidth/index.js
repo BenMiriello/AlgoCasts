@@ -12,25 +12,42 @@
 // Answer: [1, 3, 2]
 
 function levelWidth(root) {
-  let totals = [0]
-  let nodes = [root,'s']
+  let totals = [1,0]
+  let nodes = [...root.children,'s']
 
-  let node = nodes[0]
-  while (node) {
+  while (nodes.length > 1) {
+    let node = nodes.shift()
     if (node === 's') {
-      if (nodes.length < 2) {
-        return totals
-      }
-      nodes.push(nodes.shift())
+      nodes.push('s')
       totals.push(0)
     } else {
       nodes.push(...node.children)
-      nodes.shift()
       totals[totals.length - 1]++
     }
-    node = nodes[0]
   }
-}
 
+  return totals
+}
+ 
 module.exports = levelWidth;
 
+// function levelWidth(root) {
+//   let totals = [1,0]
+//   let nodes = [...root.children,'s']
+
+//   let node = nodes[0]
+//   while (node) {
+//     if (node === 's') {
+//       if (nodes.length < 2) {
+//         return totals
+//       }
+//       nodes.push(nodes.shift())
+//       totals.push(0)
+//     } else {
+//       nodes.push(...node.children)
+//       nodes.shift()
+//       totals[totals.length - 1]++
+//     }
+//     node = nodes[0]
+//   }
+// }
